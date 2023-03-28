@@ -14,17 +14,14 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "rols")
-public class Rol implements Serializable {
+@Table(name = "roles")
+public class Role implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @NotEmpty(message = "The role cannot be empty")
-    @NotNull(message = "No puede ser nulo el rol")
+    @NotNull(message = "The role cannot be null")
     @Column(nullable = false, unique = true, length = 20)
-    private String rol;
+    private String role;
 
-    public Rol(String rol) {
-        this.rol = rol;
-    }
 }
