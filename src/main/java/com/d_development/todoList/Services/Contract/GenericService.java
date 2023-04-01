@@ -9,6 +9,7 @@ import java.util.List;
 public interface GenericService <E>{
     Page<E> findAll(Pageable pageable);
     List<E> findAll(Sort sort);
+    List<E> findAll();
     E save(E entity);
     List<E> saveAll(List<E> entity);
     E findById(long id);
