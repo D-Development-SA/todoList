@@ -1,7 +1,6 @@
 package com.d_development.todoList.Controller;
 
 import com.d_development.todoList.Controller.Exception.GeneralExceptionAndControllerAdvice.ListEmptyException;
-import com.d_development.todoList.Entity.Extra.Exclusion;
 import com.d_development.todoList.Entity.Tag;
 import com.d_development.todoList.Services.Contract.TagService;
 import jakarta.validation.Valid;
@@ -98,7 +97,7 @@ public class TagController {
         if ( ids != null && ids.length > 0){
             List<Long> longList = new ArrayList<>(Arrays.asList(ids));
             tagService.deleteAllByIds(longList);
-        }else throw new ListEmptyException("Group of ids", "Arrays ids");
+        }else throw new ListEmptyException("Group of ids Tag", "Arrays ids");
     }
 
     /* Delete all tags */

@@ -102,7 +102,7 @@ public class LabelController {
 
             labelService.deleteAllByIds(longList);
 
-        }else throw new ListEmptyException("Group of ids", "Arrays ids");
+        }else throw new ListEmptyException("Group of ids Label", "Arrays ids");
     }
 
     /* Delete all labels */
