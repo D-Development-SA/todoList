@@ -1,9 +1,11 @@
 package com.d_development.todoList.Controller;
 
+import com.d_development.todoList.Controller.Exception.BDExcepcion.NotExistException;
 import com.d_development.todoList.Controller.Exception.GeneralExceptionAndControllerAdvice.ListEmptyException;
 import com.d_development.todoList.Controller.Exception.UserException.EmptyFieldException;
 import com.d_development.todoList.Controller.Exception.UserException.IncorrectFieldException;
 import com.d_development.todoList.Entity.Extra.Exclusion;
+import com.d_development.todoList.Entity.Tag;
 import com.d_development.todoList.Entity.User;
 import com.d_development.todoList.Services.Contract.UserService;
 import jakarta.validation.Valid;
@@ -49,7 +51,7 @@ public class UserController {
     public ResponseEntity<User> findUserById(@PathVariable Long id){
         User user = userService.findById(id);
 
-        return new ResponseEntity<User>(new User(), HttpStatus.OK);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     /* Returns all users that contenting the specified name */
@@ -101,6 +103,32 @@ public class UserController {
         return new ResponseEntity<>(userService.findAll().size(), HttpStatus.OK);
     }
 
+    /* Return a specific tag of the user */
+    @GetMapping("/tag/{idUser}+{nameTag}")
+    public ResponseEntity<Tag> findTagById(@PathVariable Long idUser, @PathVariable String nameTag) {
+        User user = userService.findById(idUser);
+
+        checkParam(nameTag);
+
+        Tag tagFound = user.getTags().stream()
+                .filter(tag -> tag.getNameTag().equals(nameTag))
+                .findFirst()
+                .orElseThrow(() -> {
+                    throw new NotExistException(nameTag, "Tag");
+                });
+
+        return new ResponseEntity<>(tagFound, HttpStatus.OK);
+    }
+
+    /* Return a specific tag of the user */
+    @GetMapping("/tag/quantity/{idUser}")
+    public ResponseEntity<Integer> quantityTagsUser(@PathVariable Long idUser) {
+        User user = userService.findById(idUser);
+
+        return new ResponseEntity<>(user.getTags().size(), HttpStatus.OK);
+    }
+
+
 //-----------------------PostMappings-----------------------------------
 
     /* Create and return a User */
@@ -142,7 +170,7 @@ public class UserController {
 
 //-----------------------PutMappings-----------------------------------
 
-    /* Actualiza una User en especifico */
+    /* Update a User */
     @PutMapping("/updateUser/{id}")
     public ResponseEntity<User> updateUser(@RequestBody @Valid User user, @PathVariable long id) {
         User previousUser = userService.findById(id);

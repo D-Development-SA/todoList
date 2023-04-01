@@ -15,5 +15,6 @@ public interface GenericService <E>{
     E findById(long id);
     void deleteById(long id);
     void deleteAll();
-    void deleteAll(List<E> entitys);
+    void deleteAll(List<E> entities);
+    void deleteAllByIds(List<Long> ids);
 }

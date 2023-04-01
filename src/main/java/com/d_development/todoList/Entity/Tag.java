@@ -1,6 +1,7 @@
 package com.d_development.todoList.Entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -22,6 +23,7 @@ public class Tag {
     private long id;
 
     @NotNull(message = "The name Tag cannot be null")
+    @NotEmpty(message = "The name Tag cannot be empty")
     @Size(message = "The number of characters is incorrect", min = 2, max = 15)
     @Column(unique = true, nullable = false, length = 15)
     private String nameTag;

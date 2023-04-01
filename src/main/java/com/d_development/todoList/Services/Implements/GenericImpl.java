@@ -76,7 +76,13 @@ public class GenericImpl<E, D extends PagingAndSortingRepository<E, Long> & Crud
 
     @Override
     @Transactional
-    public void deleteAll(List<E> entitys) {
-        dao.deleteAll(entitys);
+    public void deleteAll(List<E> entities) {
+        dao.deleteAll(entities);
+    }
+
+    @Override
+    @Transactional
+    public void deleteAllByIds(List<Long> ids) {
+        dao.deleteAllById(ids);
     }
 }
