@@ -33,3 +33,4 @@ build/
 .vscode/
 
 src/main/java/com/d_development/todoList/prueba.java
+TodoListFront_End/todoListFrontEnd/node_modules
