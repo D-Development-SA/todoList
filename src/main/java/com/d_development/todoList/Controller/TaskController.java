@@ -73,7 +73,6 @@ public class TaskController {
 
         previousTask.setContent(task.getContent());
         previousTask.setDone(task.isDone());
-        previousTask.setTitle(task.getTitle());
 
         Task taskSave = taskService.save(previousTask);
 

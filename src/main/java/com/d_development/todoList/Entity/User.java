@@ -29,7 +29,7 @@ public class User implements Serializable {
     @NotNull(message = "It have that exist a password")
     @Size(message = "The number of characters is incorrect", min = 10, max = 15)
     @Pattern(regexp = "[A-Za-z0-9]+", message = "The password does not meet the requirements")
-    @Column(unique = true, nullable = false, length = 15)
+    @Column(unique = true, nullable = false)
     private String password;
 
     private String imageName;

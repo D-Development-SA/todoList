@@ -38,6 +38,8 @@ public class Label {
     )
     private String iconName;
 
+    private String description;
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Task> tasks;
 }

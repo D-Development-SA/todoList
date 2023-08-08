@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
-@RestControllerAdvice
+@RestController
 @RequestMapping("api/tag")
 public class TagController {
     @Autowired

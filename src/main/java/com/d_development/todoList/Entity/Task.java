@@ -20,8 +20,6 @@ public class Task {
     @Column(nullable = false)
     private long id;
 
-    private String title;
-
     @NotNull(message = "The content of the task cannot be null, insert something content")
     @Column(nullable = false)
     private String content;

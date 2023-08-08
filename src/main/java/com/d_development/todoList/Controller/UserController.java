@@ -14,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -24,6 +25,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @RestController
 @RequestMapping("api/user")
+@CrossOrigin(origins = {"http://localhost:4200"})
 public class UserController {
     @Autowired
     private UserService userService;
@@ -135,9 +137,9 @@ public class UserController {
     @PostMapping("/createUser")
     public ResponseEntity<User> createUser(@RequestBody @Valid User user) throws IOException {
         User userAux;
-
         evaluateExclusionsWithNameUser(user);
 
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         userAux = userService.save(user);
 
         return new ResponseEntity<>(userAux, HttpStatus.CREATED);

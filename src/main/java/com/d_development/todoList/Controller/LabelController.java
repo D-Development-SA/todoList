@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@RestControllerAdvice
+@RestController
 @RequestMapping("api/label")
 public class LabelController {
     @Autowired
@@ -74,6 +74,7 @@ public class LabelController {
         previousLabel.setTasks(label.getTasks());
         previousLabel.setColor(label.getColor());
         previousLabel.setIconName(label.getIconName());
+        previousLabel.setDescription(label.getDescription());
 
         Label labelSave = labelService.save(previousLabel);
 

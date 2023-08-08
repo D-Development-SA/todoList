@@ -9,4 +9,5 @@ import java.util.List;
 
 public interface UserDao extends PagingAndSortingRepository<User, Long>, CrudRepository<User, Long> {
     List<User> findUsersByNameContains(String name);
+    List<User> findUsersByNameLike(String name);
 }

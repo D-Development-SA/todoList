@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -102,6 +103,37 @@ public class ControllerAdvice {
         hashMap = new HashMap<>();
 
         hashMap.put("Error", "Unexpected thread");
+        hashMap.put("Message", ex.getMessage());
+        hashMap.put("Specific message", ex.getLocalizedMessage());
+        hashMap.put("Cause", ex.getCause().getLocalizedMessage());
+
+        return new ResponseEntity<>(hashMap, HttpStatus.CONFLICT);
+    }
+    @ExceptionHandler(value = IOException.class)
+    public ResponseEntity<HashMap<String, String>> handlerIOException(IOException ex){
+        System.out.println(ex.getLocalizedMessage());
+        System.out.println(ex.getMessage());
+        System.out.println(ex.getCause().getMessage());
+
+        hashMap = new HashMap<>();
+
+        hashMap.put("Error", "Read of file is failed");
+        hashMap.put("Message", ex.getMessage());
+        hashMap.put("Specific message", ex.getLocalizedMessage());
+        hashMap.put("Cause", ex.getCause().getLocalizedMessage());
+
+        return new ResponseEntity<>(hashMap, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(value = NullPointerException.class)
+    public ResponseEntity<HashMap<String, String>> handlerNullPointer(NullPointerException ex){
+        System.out.println(ex.getLocalizedMessage());
+        System.out.println(ex.getMessage());
+        System.out.println(ex.getCause().getMessage());
+
+        hashMap = new HashMap<>();
+
+        hashMap.put("Error", "Exist something that is null");
         hashMap.put("Message", ex.getMessage());
         hashMap.put("Specific message", ex.getLocalizedMessage());
         hashMap.put("Cause", ex.getCause().getLocalizedMessage());
